@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>SCISSORS, PAPER, STONE!!!</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+  <style>
+    @font-face {
+            font-family: Retro;
+            src: url(Retro\ Gaming.ttf);
+        }
+    body{
+      background-color: #FFCEFE;
+      font-family: Retro;
+    }
+    button{
+      background: none;
+ box-shadow: none;
+ border: none;
+      height: 100px;
+      width: 200px;
+      font-size: 1.3cm;
+      background-color: #AAE3E2;
+      
+    }
+  
+  </style>
+  <script>
+
+    function playAudio()
+    {
+        document.getElementById("fight").play();
+
+        setTimeout(myStopFunction, 1000);
+    }
+
+function myStopFunction() {
+  window.open('sps.html');
+}
+  </script>
+</head> 
+  <body>
+    <audio autoplay id="fight">
+        <source src="fight.wav" type="audio/mpeg">
+      </audio>
+    <h1><center>SCISSORS,PAPER,STONE!!</center></h1>
+    <p><center><img src="images/cover.png" width="600px"></center></p>
+    <p><center><button type="button" onclick="playAudio()">FIGHT</button></center>
+</p>
+    
+
+  </body>
+  </html>

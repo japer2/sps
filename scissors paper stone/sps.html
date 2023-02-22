@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+
+<head>
+
+    <title>SCISSORS, PAPER, STONE!!!</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <style>
+        @font-face {
+            font-family: Retro;
+            src: url(Retro\ Gaming.ttf);
+        }
+
+        .retro {
+            font-family: Retro;
+        }
+                body {
+            background-color: #FFCEFE;
+            font-family: Retro;
+        }
+
+    </style>
+    <script>
+        myScore = 0;
+        scoremod = 1;
+        document.getElementById("scoremod").innerHTML = scoremod;
+
+        function openPopup(chosen) {
+            // Setting the computer image to loading
+            document.getElementById("computerImage").setAttribute("src", "images/loading.gif")
+
+            // Setting the user chosen image in popup
+            if (chosen == "scissors") 
+            {
+                document.getElementById("chosenImage").setAttribute("src", "images/scissors.png")
+            }
+            else if (chosen == "paper")
+            {
+                document.getElementById("chosenImage").setAttribute("src", "images/paper.png")
+            }
+            else
+            {
+                document.getElementById("chosenImage").setAttribute("src", "images/stone.png")
+            }
+            // Add on for paper and stone
+            // ...
+            
+            setTimeout(function () {
+                // Computer to reandomly generate a number
+                // 0 = scissors
+                // 1 = paper
+                // 2 = stone
+                var computer = Math.floor(Math.random() * 3);
+
+                if (computer == 0)
+                {
+                    document.getElementById("computerImage").setAttribute("src", "images/scissors.png")
+                }
+                else if (computer == 1)
+                {
+                    document.getElementById("computerImage").setAttribute("src", "images/paper.png")
+                }
+                else if (computer == 2)
+                {
+                    document.getElementById("computerImage").setAttribute("src", "images/stone.png")
+                }
+
+                checkWin();
+
+            }, 2000);  
+
+            $("#gameScreen").modal('show');
+        }
+
+        function checkWin(){
+            var chosenImage = document.getElementById("chosenImage").src;
+            var computerImage = document.getElementById("computerImage").src;
+
+            if (chosenImage == computerImage) { // Same image
+                document.getElementById("gameStatus").innerHTML = "Draw!";
+                scoremod += 1
+                document.getElementById("scoremod").innerHTML = "ScoreMod: " + scoremod;
+            }
+            else if (chosenImage.includes("images/scissors.png") && computerImage.includes("images/paper.png")) { // User scissors, computer paper
+                document.getElementById("gameStatus").innerHTML = "You Win!";
+                myScore = myScore + scoremod;
+                document.getElementById("myScore").innerHTML = "Score: " + myScore;
+                document.getElementById("win").play();
+                document.getElementById("scoremod").innerHTML = "ScoreMod: " + scoremod;
+            }
+            else if (chosenImage.includes("images/scissors.png") && computerImage.includes("images/stone.png")) { // User scissors, computer stone
+                document.getElementById("gameStatus").innerHTML = "You Lose!";
+                myScore = myScore - scoremod;
+                document.getElementById("myScore").innerHTML = "Score: " + myScore
+                document.getElementById("lose").play();
+                
+                document.getElementById("scoremod").innerHTML = "ScoreMod: " + scoremod;
+            }
+            else if (chosenImage.includes("images/paper.png") && computerImage.includes("images/scissors.png")) {
+                document.getElementById("gameStatus").innerHTML = "You Lose!";
+                myScore -= scoremod
+                document.getElementById("myScore").innerHTML = "Score: " + myScore;
+                document.getElementById("lose").play();
+                
+                document.getElementById("scoremod").innerHTML = "ScoreMod: " + scoremod;
+            }
+            else if (chosenImage.includes("images/paper.png") && computerImage.includes("images/rock.png")) {
+                document.getElementById("gameStatus").innerHTML = "You Win!";
+                myScore += scoremod
+                document.getElementById("myScore").innerHTML = "Score: " + myScore;
+                document.getElementById("win").play();
+                
+                document.getElementById("scoremod").innerHTML = "ScoreMod: " + scoremod;
+            }
+            else if (chosenImage.includes("images/stone.png") && computerImage.includes ("images/paper.png")) {
+                document.getElementById("gameStatus").innerHTML = "You Lose!";
+                myScore -= scoremod 
+                document.getElementById("myScore").innerHTML = "Score: " + myScore;
+                document.getElementById("lose").play();
+                
+                document.getElementById("scoremod").innerHTML = "ScoreMod: " + scoremod;
+            }
+            else {
+                document.getElementById("gameStatus").innerHTML = "You Win!";
+                myScore += scoremod
+                document.getElementById("myScore").innerHTML = "Score: " + myScore;
+                document.getElementById("win").play();
+                
+                document.getElementById("scoremod").innerHTML = "ScoreMod: " + scoremod;
+            }
+            // Other scenarios: User paper, computer scissors and more (total 4)
+            // ...
+
+
+            setTimeout(function () {
+                checkGameOver()
+
+            }, 1000);
+
+            
+        }
+
+        function checkGameOver() {
+            if (myScore >= 5) {
+                alert('VICTORY!')
+                myScore = 0
+                scoremod = 1
+                document.getElementById("myScore").innerHTML = "Score: " + myScore;
+                document.getElementById("scoremod").innerHTML = "ScoreMod: " + scoremod;
+                document.getElementById("victory").play();
+            }
+            else if (myScore <= -5) {
+                alert('DEFEAT!')
+                myScore = 0
+                scoremod = 1
+                document.getElementById("myScore").innerHTML = "Score: " + myScore;
+                document.getElementById("scoremod").innerHTML = "ScoreMod: " + scoremod;
+                document.getElementById("defeat").play();
+            }
+        }
+    </script>
+</head>
+
+<body> 
+    <audio autoplay id="win">
+        <source src="win.wav" type="audio/mpeg">
+      </audio>
+    <audio autoplay id="lose">
+        <source src="lose.wav" type="audio/mpeg">
+    </audio>
+    <audio autoplay id="victory">
+        <source src="victory.mp3" type="audio/mpeg">
+      </audio>
+      <audio autoplay id="defeat">
+        <source src="defeat.mp3" type="audio/mpeg">
+      </audio>
+    
+    
+
+    <div class="container"><br><br>
+        <h1 class="retro" style="color:#645CBB"><center>CHOOSE YOUR FIGHTER!!!</center></h1><br><br><br><br>
+        <div class="row">
+            <div class="col-sm-4">
+                <p><font size="+3" class="retro">PAPER</p></font></p>
+                <p><img src="images/intro_paper.png" width="200px" onclick="openPopup('paper')"></p>
+                <p class="retro">Used for writing and sending messages. How would you ever use this deadly weapon to your advantage?</p>
+            </div>
+            <div class="col-sm-4">
+                <p><font size="+3" class="retro">SCISSORS</font></p>
+                <p><img src="images/intro_scissors.png" width="200px" onclick="openPopup('scissors')"></p>
+                <p class="retro">A handy everyday tool, and while its sharp metal blade may not be able to cut through rocks, itll sure cut through paper with ease!</p>
+            </div>
+            <div class="col-sm-4">
+                <p><font size="+3" class="retro">STONE</font></p>
+                <p><img src="images/intro_stone.png" width="200px" onclick="openPopup('stone')"></p>
+                <p class="retro">A hard substance formed of mineral metals, this dull and ugly looking thing may be your only chance to defeat the formidable scissors!</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-6">
+                <font size= "+2" class="retro" id="myScore">Score: 0</font>
+            </div>
+            <div class="col-sm-6">
+                <font size= "+2" class="retro" id="scoremod">ScoreMod: 1</font>
+            </div>
+        </div>
+        
+    </div>
+</body>
+
+<!-- Game Modal -->
+<div class="modal fade" id="gameScreen" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h2 class="modal-title" style="font-size: 24px;">Scissors Paper Stone!!! </h2>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="row">
+            <div class="col-sm-5">
+                <img id="chosenImage" src="images/intro_stone.png" width="150px">
+            </div>
+            <div class="col-sm-2">
+                VS..
+            </div>
+            <div class="col-sm-5">
+                <img id="computerImage" src="images/loading.gif" width="150px">
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-4"></div>
+            <div class="col-sm-4">
+                <p id="gameStatus"></p>
+            </div>
+            <div class="col-sm-4"></div>
+          </div>
+        </div>
+      </div>
+    </div>
