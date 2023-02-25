@@ -24,7 +24,7 @@
     </style>
     <script>
         myScore = 0;
-        scoremod = 0;
+        scoremod = 1;
         document.getElementById("scoremod").innerHTML = scoremod;
 
         function openPopup(chosen) {
@@ -146,7 +146,7 @@
             if (myScore >= 5) {
                 alert('VICTORY!')
                 myScore = 0
-                scoremod = 1
+                scoremod = 0
                 document.getElementById("myScore").innerHTML = "Score: " + myScore;
                 document.getElementById("scoremod").innerHTML = "ScoreMod: " + scoremod;
                 document.getElementById("victory").play();
@@ -154,7 +154,7 @@
             else if (myScore <= -5) {
                 alert('DEFEAT!')
                 myScore = 0
-                scoremod = 1
+                scoremod = 0
                 document.getElementById("myScore").innerHTML = "Score: " + myScore;
                 document.getElementById("scoremod").innerHTML = "ScoreMod: " + scoremod;
                 document.getElementById("defeat").play();
@@ -203,7 +203,7 @@
                 <font size= "+2" class="retro" id="myScore">Score: 0</font>
             </div>
             <div class="col-sm-6">
-                <font size= "+2" class="retro" id="scoremod">ScoreMod: 0</font>
+                <font size= "+2" class="retro" id="scoremod">ScoreMod: 1</font>
             </div>
         </div>
         
